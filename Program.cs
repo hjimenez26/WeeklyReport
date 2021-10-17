@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -131,14 +131,16 @@ namespace ewrWeeklyReport
                             int intDTErrors = getDateTimeErrors(dtStartDate, dtEndDate,(int)dtModems.Rows[intModemCnt]["modemid"],dtFacilities.Rows[intFacCnt]["connectString"].ToString());
                             var   varICU6 = ParseICU6Modem((int) dtModems.Rows[intModemCnt]["modemid"]);
 
+                            if ((countResults.onOffRatio * 100) > 95)
+
                             //add table row with data
                             strb.AppendLine(addHTMLRowData(intTracker, dtModems, intModemCnt, intDTErrors, countResults,varICU6.dtTimeStamp,varICU6.boolInDB));
 
-                            //intArryModems[intModemCnt] = intArryModemCount;
-                            //intOffSum = intOffSum + intArryModemCount[0];//compute total offs for all modems in facility
-                            //intOnSum = intOnSum + intArryModemCount[1];//compute total son for all modems in facility
+                                //intArryModems[intModemCnt] = intArryModemCount;
+                                intOffSum = intOffSum + countResults.totalOffs;//compute total offs for all modems in facility
+                                intOnSum = intOnSum + countResults.totalOns;//compute total son for all modems in facility
 
-                        }
+                            }
                         else
                         {
                             //add table row no data
@@ -533,7 +535,7 @@ namespace ewrWeeklyReport
             dtRecipients = henrySqlStuff.execute.sqlExecuteSelectForever(strConnectMain, strSelectRecipients, strErrorFilePath);
         }
 
-
+        
    
 
 
@@ -542,25 +544,29 @@ namespace ewrWeeklyReport
             try
             {
 
-           
-            MailAddress from = new MailAddress("admin@bridgetech.net");
-            // MailAddress to = new MailAddress(emailaddress);
+                MailAddress from = new MailAddress("admin@bridgetech.net");
+            //MailAddress me = new MailAddress("henry@bridgetech.net");
+            //MailAddress meHotMail = new MailAddress("h_jimenez_26@hotmail.com");
 
-            //MailAddress ian = new MailAddress("ian@bridgetech.net");
 
-            //NEED TO ADD HENRY AND IAN TO TABLE
-                for (int intRecipientCount = 0;
-                    intRecipientCount < dtRecipients.Rows.Count;
-                    intRecipientCount++) //for each recipient in table
-                {
-                    MailAddress to = new MailAddress(dtRecipients.Rows[intRecipientCount]["emailAddress"].ToString());
+                // MailAddress to = new MailAddress(emailaddress);
 
-                    MailMessage msgContact = new MailMessage(from, to)
-                    {
-                        IsBodyHtml = true,
-                        Subject = "Database Check" + " " + dtStartDate + "--" + dtEndDate,
-                        //Body = strMessage
-                    };
+                //MailAddress ian = new MailAddress("ian@bridgetech.net");
+
+                //NEED TO ADD HENRY AND IAN TO TABLE
+                //for (int intRecipientCount = 0;
+                //    intRecipientCount < dtRecipients.Rows.Count;
+                //    intRecipientCount++) //for each recipient in table
+                //{
+                    //MailAddress to = new MailAddress(dtRecipients.Rows[intRecipientCount]["emailAddress"].ToString());
+                    MailAddress to = new MailAddress("warren@bridgetech.net");
+                    MailMessage msgContact = new MailMessage(from, to);
+                    //msgContact.Bcc.Add(me);
+                    //msgContact.CC.Add(meHotMail);
+
+                    msgContact.Subject = "admin@bridgetech.net test ";
+                    msgContact.IsBodyHtml = true;
+
 
                     //  Attachment inlineLogo = new Attachment("bridge.png");
                     //   msgContact.Attachments.Add(inlineLogo);
@@ -571,19 +577,24 @@ namespace ewrWeeklyReport
                     msgContact.Body = "<center></center><br/><br/>" + strMessage;
 
                     //  msgContact.CC.Add(ian);
-                    SmtpClient client = new SmtpClient("smtp.office365.com");
-                    client.Credentials = new System.Net.NetworkCredential("admin@bridgetech.net", "Password101!");
+                    SmtpClient client = new SmtpClient("smtpout.secureserver.net");
+
+
+                    client.Credentials = new System.Net.NetworkCredential("admin@bridgetech.net", "3epHar83agachiWrodUtU@=3r7zitu");
                     client.EnableSsl = true;
-                    client.Port = 587; 
+                    client.Port = 587;
+
+
+                    //   client2.Port = 587;
 
                     client.Send(msgContact);
-                    
-                
+
+
                     msgContact.Dispose();
 
                     //string strUpdateRecLog = "INSERT INTO tblReportRecipientsLog VALUES('" + dtRecipients.Rows[intRecipientCount]["Recipient"].ToString() + "', '" + dtNow.Date.ToString("d") + "', '" + dtNow.ToShortTimeString() + "', '" + "Database Check Report')";
                     //henrySqlStuff.execute.sqlExecuteSelectForever(strConnectEWR, strUpdateRecLog, strErrorFilePath);
-                }
+                //}
             
         }
         catch (Exception e)
@@ -593,7 +604,40 @@ namespace ewrWeeklyReport
 } //
 
 
-     
+        static protected void sendmail2(string emailaddress, string strMessage)
+        {
+
+            MailAddress from = new MailAddress("admin@bridgetech.net");
+            MailAddress to = new MailAddress(emailaddress);
+            MailAddress me = new MailAddress("henry@bridgetech.net");
+            MailAddress meHotMail = new MailAddress("h_jimenez_26@hotmail.com");
+
+            MailMessage msgContact = new MailMessage(from, to);
+            msgContact.Bcc.Add(me);
+            msgContact.CC.Add(meHotMail);
+
+
+            msgContact.Subject = "admin@bridgetech.net test ";
+            msgContact.IsBodyHtml = true;
+            msgContact.Body = strMessage;
+
+        
+            SmtpClient client = new SmtpClient("smtpout.secureserver.net");
+
+          
+            client.Credentials = new System.Net.NetworkCredential("admin@bridgetech.net", "3epHar83agachiWrodUtU@=3r7zitu");
+            client.EnableSsl = true;
+            client.Port = 587;
+
+
+            //   client2.Port = 587;
+
+            client.Send(msgContact);
+
+
+
+        }
+
 
 
         static private string addHTMLRowData(int intTracker, DataTable dtModems, int intModemCnt, int intDTErrors, CountResults countResults,DateTime? dtTimestamp,bool? boolRebooted)
