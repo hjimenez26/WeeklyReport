@@ -9,8 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using HenryErrorHandling;
 
-/* need to figure out how to load in modem data, currently getting nothing??
- * also should look into making visual studio more like vscode */
 namespace ewrWeeklyReport
 {
     class Program
