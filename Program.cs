@@ -53,8 +53,6 @@ namespace ewrWeeklyReport
             try
             {
 
-         
-
             loadTables();
             loadRecipients();
       
@@ -88,8 +86,7 @@ namespace ewrWeeklyReport
                     int intOnSum = 0;
                     int intTracker = 0;
 
-                        //Begin html table for each facility.
-                        
+                    //Begin html table for each facility.
                     strb.AppendLine("<center><table cellpadding=\"3\" style =\"border-collapse:collapse; width:75%; empty-cells:hide\" border='1' font-color=\"black\">" +
                         "<thead>" +
                             "<tr>" +
@@ -100,6 +97,12 @@ namespace ewrWeeklyReport
                                 "<th  scope = \"col\">Door 2 On</th>" + 
                                 "<th  scope = \"col\">Door 3 Off</th>" + 
                                 "<th  scope = \"col\">Door 3 On</th>" + 
+                                "<th  scope = \"col\">Door 4 Off</th>" + 
+                                "<th  scope = \"col\">Door 4 On</th>" + 
+                                "<th  scope = \"col\">Door 5 Off</th>" + 
+                                "<th  scope = \"col\">Door 5 On</th>" + 
+                                "<th  scope = \"col\">Door 6 Off</th>" + 
+                                "<th  scope = \"col\">Door 6 On</th>" + 
                                 "<th  scope = \"col\">Total Off</th>" +
                                 "<th  scope = \"col\">Total On</th>" +
                                 "<th  scope = \"col\">Ratio ON/OFF</th>" +
@@ -109,6 +112,12 @@ namespace ewrWeeklyReport
                                 "<th  scope = \"col\">Door 2 Max On</th>" +
                                 "<th  scope = \"col\">Door 3 Max Off</th>" +
                                 "<th  scope = \"col\">Door 3 Max On</th>" +
+                                "<th  scope = \"col\">Door 4 Max Off</th>" +
+                                "<th  scope = \"col\">Door 4 Max On</th>" +
+                                "<th  scope = \"col\">Door 5 Max Off</th>" +
+                                "<th  scope = \"col\">Door 5 Max On</th>" +
+                                "<th  scope = \"col\">Door 6 Max Off</th>" +
+                                "<th  scope = \"col\">Door 6 Max On</th>" +
                             "</tr>" +
                         "</thead>" +
                         "<tbody>"
@@ -268,18 +277,30 @@ namespace ewrWeeklyReport
             Int16 d1OffCount = 0;
             Int16 d2OffCount = 0;
             Int16 d3OffCount = 0;
+            Int16 d4OffCount = 0;
+            Int16 d5OffCount = 0;
+            Int16 d6OffCount = 0;
             Int16 d1OnsCount = 0;
             Int16 d2OnsCount = 0;
             Int16 d3OnsCount = 0;
+            Int16 d4OnsCount = 0;
+            Int16 d5OnsCount = 0;
+            Int16 d6OnsCount = 0;
 
             float onOffRatio = 0;
 
             Int16 d1MaxOffs = 0;
             Int16 d2MaxOffs = 0;
             Int16 d3MaxOffs = 0;
+            Int16 d4MaxOffs = 0;
+            Int16 d5MaxOffs = 0;
+            Int16 d6MaxOffs = 0;
             Int16 d1MaxOns = 0;
             Int16 d2MaxOns = 0;
             Int16 d3MaxOns = 0;
+            Int16 d4MaxOns = 0;
+            Int16 d5MaxOns = 0;
+            Int16 d6MaxOns = 0;
 
             Int16 offsTotal = 0;
             Int16 onsTotal = 0;
@@ -296,6 +317,18 @@ namespace ewrWeeklyReport
             {
                 d3OffCount = System.Convert.ToInt16(dtModemPCCountSummary.Rows[0]["d3offs"]);
             }
+            if (!dtModemPCCountSummary.Rows[0].IsNull("d4offs"))
+            {
+                d4OffCount = System.Convert.ToInt16(dtModemPCCountSummary.Rows[0]["d4offs"]);
+            }
+            if (!dtModemPCCountSummary.Rows[0].IsNull("d5offs"))
+            {
+                d5OffCount = System.Convert.ToInt16(dtModemPCCountSummary.Rows[0]["d5offs"]);
+            }
+            if (!dtModemPCCountSummary.Rows[0].IsNull("d6offs"))
+            {
+                d6OffCount = System.Convert.ToInt16(dtModemPCCountSummary.Rows[0]["d6offs"]);
+            }
             if (!dtModemPCCountSummary.Rows[0].IsNull("d1ons"))
             {
                 d1OnsCount = System.Convert.ToInt16(dtModemPCCountSummary.Rows[0]["d1ons"]);
@@ -307,6 +340,18 @@ namespace ewrWeeklyReport
             if (!dtModemPCCountSummary.Rows[0].IsNull("d3ons"))
             {
                 d3OnsCount = System.Convert.ToInt16(dtModemPCCountSummary.Rows[0]["d3ons"]);
+            }
+            if (!dtModemPCCountSummary.Rows[0].IsNull("d4ons"))
+            {
+                d4OnsCount = System.Convert.ToInt16(dtModemPCCountSummary.Rows[0]["d4ons"]);
+            }
+            if (!dtModemPCCountSummary.Rows[0].IsNull("d5ons"))
+            {
+                d5OnsCount = System.Convert.ToInt16(dtModemPCCountSummary.Rows[0]["d5ons"]);
+            }
+            if (!dtModemPCCountSummary.Rows[0].IsNull("d6ons"))
+            {
+                d6OnsCount = System.Convert.ToInt16(dtModemPCCountSummary.Rows[0]["d6ons"]);
             }
 
 
@@ -334,6 +379,33 @@ namespace ewrWeeklyReport
             {
                 d3MaxOffs = -999;
             }
+            if (!dtModemPCCountSummary.Rows[0].IsNull("m4off"))
+            {
+                d4MaxOffs = System.Convert.ToInt16(dtModemPCCountSummary.Rows[0]["m4off"]);
+            }
+            else
+            {
+                d4MaxOffs = -999;
+            }
+            if (!dtModemPCCountSummary.Rows[0].IsNull("m5off"))
+            {
+                d5MaxOffs = System.Convert.ToInt16(dtModemPCCountSummary.Rows[0]["m5off"]);
+            }
+            else
+            {
+                d5MaxOffs = -999;
+            }
+            if (!dtModemPCCountSummary.Rows[0].IsNull("m6off"))
+            {
+                d6MaxOffs = System.Convert.ToInt16(dtModemPCCountSummary.Rows[0]["m6off"]);
+            }
+            else
+            {
+                d6MaxOffs = -999;
+            }
+
+
+
             if (!dtModemPCCountSummary.Rows[0].IsNull("m1on"))
             {
                 d1MaxOns = System.Convert.ToInt16(dtModemPCCountSummary.Rows[0]["m1on"]);
@@ -358,18 +430,44 @@ namespace ewrWeeklyReport
             {
                 d3MaxOns = -999;
             }
-
-            if (d3OffCount != -999 && d2OffCount != -999 && d1OffCount != -999)
+            if (!dtModemPCCountSummary.Rows[0].IsNull("m4on"))
             {
-                offsTotal = System.Convert.ToInt16(d3OffCount + d2OffCount + d1OffCount);
+                d4MaxOns = System.Convert.ToInt16(dtModemPCCountSummary.Rows[0]["m4on"]);
+            }
+            else
+            {
+                d4MaxOns = -999;
+            }
+            if (!dtModemPCCountSummary.Rows[0].IsNull("m5on"))
+            {
+                d5MaxOns = System.Convert.ToInt16(dtModemPCCountSummary.Rows[0]["m5on"]);
+            }
+            else
+            {
+                d5MaxOns = -999;
+            }
+            if (!dtModemPCCountSummary.Rows[0].IsNull("m6on"))
+            {
+                d6MaxOns = System.Convert.ToInt16(dtModemPCCountSummary.Rows[0]["m6on"]);
+            }
+            else
+            {
+                d6MaxOns = -999;
+            }
+
+
+
+            if (d6OffCount != -999 && d5OffCount != -999 && d4OffCount != -999 && d3OffCount != -999 && d2OffCount != -999 && d1OffCount != -999)
+            {
+                offsTotal = System.Convert.ToInt16(d1OffCount + d2OffCount + d3OffCount + d4OffCount + d5OffCount + d6OffCount);
             }
             else
             {
                 offsTotal = -999;
             }
-            if (d3OnsCount != -999 && d2OnsCount != -999 && d1OnsCount != -999)
+            if (d6OnsCount != -999 && d5OnsCount != -999 && d4OnsCount != -999 && d3OnsCount != -999 && d2OnsCount != -999 && d1OnsCount != -999)
             {
-                onsTotal = System.Convert.ToInt16(d1OnsCount + d2OnsCount + d3OnsCount);
+                onsTotal = System.Convert.ToInt16(d1OnsCount + d2OnsCount + d3OnsCount + d4OnsCount + d5OnsCount + d6OnsCount);
             }
             else
             {
@@ -391,16 +489,28 @@ namespace ewrWeeklyReport
             countResults.d1Offs = d1OffCount;
             countResults.d2Offs = d2OffCount;
             countResults.d3Offs = d3OffCount;
+            countResults.d4Offs = d4OffCount;
+            countResults.d5Offs = d5OffCount;
+            countResults.d6Offs = d6OffCount;
             countResults.d1Ons = d1OnsCount;
             countResults.d2Ons = d2OnsCount;
             countResults.d3Ons = d3OnsCount;
+            countResults.d4Ons = d4OnsCount;
+            countResults.d5Ons = d5OnsCount;
+            countResults.d6Ons = d6OnsCount;
 
             countResults.d1maxOffs = d1MaxOffs;
             countResults.d2maxOffs = d2MaxOffs;
             countResults.d3maxOffs = d3MaxOffs;
+            countResults.d4maxOffs = d4MaxOffs;
+            countResults.d5maxOffs = d5MaxOffs;
+            countResults.d6maxOffs = d6MaxOffs;
             countResults.d1maxOns = d1MaxOns;
             countResults.d2maxOns = d2MaxOns;
             countResults.d3maxOns = d3MaxOns;
+            countResults.d4maxOns = d4MaxOns;
+            countResults.d5maxOns = d5MaxOns;
+            countResults.d6maxOns = d6MaxOns;
 
             countResults.totalOffs = offsTotal;
             countResults.totalOns = onsTotal;
@@ -453,14 +563,14 @@ namespace ewrWeeklyReport
         static private DataTable getModemDataSummary(DateTime dtBegin, DateTime dtEnd, int intModemId, string strConnect)
         {
             string strSelect = "select sum(d1off+d2off+d2off+d4off+d5off+d6off) as offs,sum(d1on+d2on+d3on+d4on+d5on+d6on) as ons  FROM [dbo].[tblPeopleCount6] where modemid =" + intModemId + " and gpsdatetime > '" + dtBegin + "' and gpsdatetime <'" + dtEnd + "'";
-            string anotherString = "select sum(d1off) as d1offs,sum(d2off) as d2offs,sum(d3off) as d3offs,sum(d1on) as d1ons,sum(d2on) as d2ons,sum(d3on) as d3ons,max(d1off) as m1off,max(d2off) as m2off,max(d3off) as m3off,max(d1on) as m1on,max(d2on) as m2on,max(d3on) as m3on  FROM [dbo].[tblPeopleCount6] where modemid =" +
+            string anotherString = "select sum(d1off) as d1offs,sum(d2off) as d2offs,sum(d3off) as d3offs, sum(d4off) as d4offs, sum(d5off) as d5offs, sum(d6off) as d6offs, sum(d1on) as d1ons,sum(d2on) as d2ons,sum(d3on) as d3ons, sum(d4on) as d4ons, sum(d5on) as d5ons, sum(d6on) as d6ons, max(d1off) as m1off,max(d2off) as m2off,max(d3off) as m3off, max(d4off) as m4off, max(d5off) as m5off, max(d6off) as m6off, max(d1on) as m1on,max(d2on) as m2on,max(d3on) as m3on, max(d4on) as m4on, max(d5on) as m5on, max(d6on) as m6on  FROM [dbo].[tblPeopleCount6] where modemid =" +
                     intModemId + " and gpsdatetime > '" + dtBegin + "' and gpsdatetime <'" + dtEnd + "'";
 
-            DataTable dt = henrySqlStuff.execute.sqlExecuteSelectForever(strConnect, strSelect, strErrorFilePath);
             //DataTable dt = henrySqlStuff.execute.sqlExecuteSelectForever(strConnect, strSelect, strErrorFilePath);
-            DataTable tmp = henrySqlStuff.execute.sqlExecuteSelectForever(strConnect, anotherString, strErrorFilePath);
+            //DataTable dt = henrySqlStuff.execute.sqlExecuteSelectForever(strConnect, strSelect, strErrorFilePath);
+            DataTable dt = henrySqlStuff.execute.sqlExecuteSelectForever(strConnect, anotherString, strErrorFilePath);
 
-            return tmp;
+            return dt;
         }
 
 
@@ -512,9 +622,6 @@ namespace ewrWeeklyReport
             string strSelectMain =
                 "select [FacilityID],[FacilityName],[FacilityCode],[Active],[TimeZoneID],[createdDate],[FacilityTypeID],[connectString],[honorDST],[nwLat],[nwLong],[seLat],[seLong] from tblFacilities where FacilityID=6";
             dtFacilities = henrySqlStuff.execute.sqlExecuteSelectForever(strConnectMain, strSelectMain, strErrorFilePath);
-
-
-
         }
 
 
@@ -664,37 +771,61 @@ namespace ewrWeeklyReport
                     "<td align = \"center\">" + countResults.d2Ons + "</td>" + //d2 ons
                     "<td align = \"center\">" + countResults.d3Offs + "</td>" + //d3 offs 
                     "<td align = \"center\">" + countResults.d3Ons + "</td>" + //d3 ons
+                    "<td align = \"center\">" + countResults.d4Offs + "</td>" + //d4 offs 
+                    "<td align = \"center\">" + countResults.d4Ons + "</td>" + //d4 ons
+                    "<td align = \"center\">" + countResults.d5Offs + "</td>" + //d5 offs 
+                    "<td align = \"center\">" + countResults.d5Ons + "</td>" + //d5 ons
+                    "<td align = \"center\">" + countResults.d6Offs + "</td>" + //d6 offs 
+                    "<td align = \"center\">" + countResults.d6Ons + "</td>" + //d6 ons
                     "<td align = \"center\">" + countResults.totalOffs + "</td>" + //total offs
                     "<td align = \"center\">" + countResults.totalOns + "</td>"  + //total ons
                     "<td align = \"center\">" + countResults.onOffRatio + "</td>" + //On/off ratio
-                     "<td align = \"center\">" + countResults.d1maxOffs + "</td>" + //d1 max offs
-                     "<td align = \"center\">" + countResults.d1maxOns + "</td>" + //d1 max ons
-                     "<td align = \"center\">" + countResults.d2maxOffs + "</td>" + //d2 max offs
-                     "<td align = \"center\">" + countResults.d2maxOns + "</td>" + //d2 max ons
-                     "<td align = \"center\">" + countResults.d3maxOffs + "</td>" + //d3 max offs
-                     "<td align = \"center\">" + countResults.d3maxOns + "</td>";//d3 max ons
+                 "<td align = \"center\">" + countResults.d1maxOffs + "</td>" + //d1 max offs
+                 "<td align = \"center\">" + countResults.d1maxOns + "</td>" + //d1 max ons
+                 "<td align = \"center\">" + countResults.d2maxOffs + "</td>" + //d2 max offs
+                 "<td align = \"center\">" + countResults.d2maxOns + "</td>" + //d2 max ons
+                 "<td align = \"center\">" + countResults.d3maxOffs + "</td>" + //d3 max offs
+                 "<td align = \"center\">" + countResults.d3maxOns + "</td>" +
+                 "<td align = \"center\">" + countResults.d4maxOffs + "</td>" + 
+                 "<td align = \"center\">" + countResults.d4maxOns + "</td>"+
+                 "<td align = \"center\">" + countResults.d5maxOffs + "</td>" + 
+                 "<td align = \"center\">" + countResults.d5maxOns + "</td>"+
+                 "<td align = \"center\">" + countResults.d6maxOffs + "</td>" + 
+                 "<td align = \"center\">" + countResults.d6maxOns + "</td>";
 
             }
             else
             {
                 strRow =
                     "<tr>" +
-                     "<td align = \"center\"><strong>" + dtModems.Rows[intModemCnt]["modemname"] + "</td>" + //name
+                    "<td align = \"center\"><strong>" + dtModems.Rows[intModemCnt]["modemname"] + "</td>" + //name
                     "<td align = \"center\">" + countResults.d1Offs + "</td>" + //d1 offs
                     "<td align = \"center\">" + countResults.d1Ons + "</td>" + //d1 ons
                     "<td align = \"center\">" + countResults.d2Offs + "</td>" + //d2 offs
                     "<td align = \"center\">" + countResults.d2Ons + "</td>" + //d2 ons
-                    "<td align = \"center\">" + countResults.d3Offs + "</td>" + //d3 offs
+                    "<td align = \"center\">" + countResults.d3Offs + "</td>" + //d3 offs 
                     "<td align = \"center\">" + countResults.d3Ons + "</td>" + //d3 ons
+                    "<td align = \"center\">" + countResults.d4Offs + "</td>" + //d4 offs 
+                    "<td align = \"center\">" + countResults.d4Ons + "</td>" + //d4 ons
+                    "<td align = \"center\">" + countResults.d5Offs + "</td>" + //d5 offs 
+                    "<td align = \"center\">" + countResults.d5Ons + "</td>" + //d5 ons
+                    "<td align = \"center\">" + countResults.d6Offs + "</td>" + //d6 offs 
+                    "<td align = \"center\">" + countResults.d6Ons + "</td>" + //d6 ons
                     "<td align = \"center\">" + countResults.totalOffs + "</td>" + //total offs
                     "<td align = \"center\">" + countResults.totalOns + "</td>" + //total ons
                     "<td align = \"center\">" + countResults.onOffRatio + "</td>" + //On/off ratio
-                     "<td align = \"center\">" + countResults.d1maxOffs + "</td>" + //d1 max offs
-                     "<td align = \"center\">" + countResults.d1maxOns + "</td>" + //d1 max ons
-                     "<td align = \"center\">" + countResults.d2maxOffs + "</td>" + //d2 max offs
-                     "<td align = \"center\">" + countResults.d2maxOns + "</td>" + //d2 max ons
-                     "<td align = \"center\">" + countResults.d3maxOffs + "</td>" + //d3 max offs
-                     "<td align = \"center\">" + countResults.d3maxOns + "</td>";//d3 max ons
+                    "<td align = \"center\">" + countResults.d1maxOffs + "</td>" + //d1 max offs
+                    "<td align = \"center\">" + countResults.d1maxOns + "</td>" + //d1 max ons
+                    "<td align = \"center\">" + countResults.d2maxOffs + "</td>" + //d2 max offs
+                    "<td align = \"center\">" + countResults.d2maxOns + "</td>" + //d2 max ons
+                    "<td align = \"center\">" + countResults.d3maxOffs + "</td>" + //d3 max offs
+                    "<td align = \"center\">" + countResults.d3maxOns + "</td>" +
+                    "<td align = \"center\">" + countResults.d4maxOffs + "</td>" +
+                    "<td align = \"center\">" + countResults.d4maxOns + "</td>" +
+                    "<td align = \"center\">" + countResults.d5maxOffs + "</td>" +
+                    "<td align = \"center\">" + countResults.d5maxOns + "</td>" +
+                    "<td align = \"center\">" + countResults.d6maxOffs + "</td>" +
+                    "<td align = \"center\">" + countResults.d6maxOns + "</td>";
 
             }
             return strRow;
@@ -726,15 +857,27 @@ namespace ewrWeeklyReport
                 "<td align = \"center\">" + 0 + "</td>" + //d2 ons
                 "<td align = \"center\">" + 0 + "</td>" + //d3 offs
                 "<td align = \"center\">" + 0 + "</td>" + //d3 ons
+                "<td align = \"center\">" + 0 + "</td>" + 
+                "<td align = \"center\">" + 0 + "</td>" + 
+                "<td align = \"center\">" + 0 + "</td>" + 
+                "<td align = \"center\">" + 0 + "</td>" + 
+                "<td align = \"center\">" + 0 + "</td>" + 
+                "<td align = \"center\">" + 0 + "</td>" + 
                 "<td align = \"center\"><font color=\"red\"></font></td>" + //offs
                 "<td align = \"center\"><font color=\"red\"></font></td>" + //ons
                 "<td align = \"center\">" + 0 + "</td>" + //On/off ratio
                  "<td align = \"center\">" + 0 + "</td>" + //d1 max offs
-                 "<td align = \"center\">" + 0 + "</td>" + //d2 max ons
+                 "<td align = \"center\">" + 0 + "</td>" + //d1 max ons
                  "<td align = \"center\">" + 0 + "</td>" + //d2 max offs
                  "<td align = \"center\">" + 0 + "</td>" + //d2 max ons
                  "<td align = \"center\">" + 0 + "</td>" + //d3 max offs
-                 "<td align = \"center\">" + 0 + "</td>";//d3 max ons
+                 "<td align = \"center\">" + 0 + "</td>" + //d3 max ons
+                 "<td align = \"center\">" + 0 + "</td>" + 
+                 "<td align = \"center\">" + 0 + "</td>" +
+                 "<td align = \"center\">" + 0 + "</td>" + 
+                 "<td align = \"center\">" + 0 + "</td>" +
+                 "<td align = \"center\">" + 0 + "</td>" + 
+                 "<td align = \"center\">" + 0 + "</td>";
 
 
             return strRow;
@@ -754,9 +897,15 @@ namespace ewrWeeklyReport
         public int d1Offs { get; set; }
         public int d2Offs { get; set; }
         public int d3Offs { get; set; }
+        public int d4Offs { get; set; }
+        public int d5Offs { get; set; }
+        public int d6Offs { get; set; }
         public int d1Ons { get; set; }
         public int d2Ons { get; set; }
         public int d3Ons { get; set; }
+        public int d4Ons { get; set; }
+        public int d5Ons { get; set; }
+        public int d6Ons { get; set; }
 
         public int totalOffs { get; set; }
         public int totalOns { get; set; }
@@ -765,9 +914,15 @@ namespace ewrWeeklyReport
         public int d1maxOffs { get; set; }
         public int d2maxOffs { get; set; }
         public int d3maxOffs { get; set; }
+        public int d4maxOffs { get; set; }
+        public int d5maxOffs { get; set; }
+        public int d6maxOffs { get; set; }
         public int d1maxOns { get; set; }
         public int d2maxOns { get; set; }
         public int d3maxOns { get; set; }
+        public int d4maxOns { get; set; }
+        public int d5maxOns { get; set; }
+        public int d6maxOns { get; set; }
 
     }
 }
