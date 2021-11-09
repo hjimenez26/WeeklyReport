@@ -809,7 +809,7 @@ namespace ewrWeeklyReport
     {
         public CountResults()
         {
-            // no op (so we can use auto-gen getter/setter
+            // no op (so we can use auto-gen getter/setter)
         }
 
         public int d1Offs { get; set; }
