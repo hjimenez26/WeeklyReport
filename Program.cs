@@ -62,7 +62,7 @@ namespace ewrWeeklyReport
                 for (int intFacCnt = 0; intFacCnt < dtFacilities.Rows.Count; intFacCnt++)//each facility
                 {
                     strbFacs.AppendLine("<br/>");
-                    strbFacs.AppendLine("<center><font size=\"6\"><strong>" + dtFacilities.Rows[intFacCnt]["FacilityName"].ToString() + "</strong></font></center><br/>");
+                    strbFacs.AppendLine("<p style=\"font-weight:bold; text-align:center; font-size:28px; font-color:black\">" + dtFacilities.Rows[intFacCnt]["FacilityName"].ToString() + "</br> " + "</p>" + "<p style=\"font-weight:semi-bold; text-align:center; font-size:25px; font-color:gray\">" + dtStartDate.ToString("D") + "</p>");
                     int intFacId = (int)dtFacilities.Rows[intFacCnt]["FacilityID"];
 
 
