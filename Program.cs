@@ -12,7 +12,7 @@ namespace ewrWeeklyReport
 
 
 
-        private static string strConnectMain = "Data Source=66.85.128.171;Initial Catalog=bridgemain;User ID=warren;Password=jl-a#1uKif?lrabrl?h@";
+        private static string strConnectMain = "Data Source=66.85.128.171;Initial Catalog=bridgemain;User ID=;Password=jl-";
 
         private static string strConnectEWR = "Data Source=66.85.128.171;Initial Catalog=EWR;User ID=warren;Password=jl-a#1uKif?lrabrl?h@";
 
